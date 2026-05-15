@@ -1,0 +1,118 @@
+# PokéDecks — Data Flow
+
+All persistent data lives under `%TEMP%\PokeLog\`. Nothing is written outside this folder. No network requests are made except to TCGdex (and optionally pokemontcg.io in a future release).
+
+---
+
+## App Launch
+
+```
+App starts
+  └─ Load /user/state.json
+  │    → Restore collection, duplicates, column settings, set list, API keys
+  │    → Set first visible set as active
+  │
+  └─ Load /sets/index.json (if exists) → populate set catalogue immediately
+  └─ Fetch fresh index from TCGdex in background (always, not just on first launch)
+       → On success: overwrite /sets/index.json
+       → On failure: retain cached index, show sync error, retry after 30s
+```
+
+---
+
+## User Adds a Set
+
+```
+User opens Add Set modal
+  └─ Modal reads from in-memory setsIndex (populated from /sets/index.json)
+  └─ Drill-down: Series → Language → Set
+  └─ User clicks a set tile
+       → Set entry written to managedSets[] in state
+       → State saved to /user/state.json
+       → Set becomes active, user navigated to Collection tab
+```
+
+---
+
+## User Opens a Set
+
+```
+User selects a set (tab bar or Sets page)
+  └─ Check /sets/{lang}/{series}/{id}.json exists
+       → Exists: read file, render card table
+       → Missing:
+            └─ Fetch from TCGdex: GET /v2/{lang}/sets/{tcgdexId}
+            └─ Shape response to per-set cache schema
+            └─ Write to /sets/{lang}/{series}/{id}.json
+            └─ Render card table
+```
+
+---
+
+## Collection / Duplicate Update
+
+```
+User checks a card / increments a duplicate
+  └─ State updated in memory immediately (React state)
+  └─ Debounced write to /user/state.json
+       (triggers on any change to collection, duplicates, visibleColumns, managedSets, apiKeys)
+```
+
+---
+
+## Variant Resolution (render time)
+
+```
+Active set selected
+  └─ Look up setId in set-variants.json
+       → Found: use that set's variant array
+       → Not found: use full global variant list, default-visible = [Std, H, RH]
+  └─ For each variant abbreviation: look up full name in variants.json
+  └─ Intersect with visibleColumns[setId] from user state → active columns
+  └─ Render card table with active columns only
+```
+
+---
+
+## Export
+
+```
+JSON export
+  └─ Read collection[setId], duplicates[setId], visibleColumns[setId] from state
+  └─ Write to user-chosen .json file
+  └─ Default filename: PokeDecks_{series}_{name}_{lang}_Backup.json
+
+PDF export
+  └─ Trigger browser print dialog on the rendered card table
+  └─ Print stylesheet hides UI chrome, renders cover page + card table only
+```
+
+---
+
+## Import
+
+```
+User selects a .json backup file
+  └─ Parse file, read setId
+  └─ Overwrite collection[setId], duplicates[setId], visibleColumns[setId] in state
+  └─ If setId not in managedSets: add it automatically
+  └─ Save state to /user/state.json
+```
+
+---
+
+## Cache Clear
+
+```
+User clicks "Clear card cache" in Settings
+  └─ Delete all language subdirectories under /sets/ (recursive)
+  └─ /sets/index.json is NOT deleted
+  └─ /user/state.json is NOT deleted (collection data preserved)
+  └─ Card data re-fetched from TCGdex on next set selection
+```
+
+---
+
+## Full Reset
+
+Deleting `/user/state.json` resets the app to a clean state. The set catalogue (`/sets/index.json`) and all per-set card caches can be deleted independently — they will be re-fetched from TCGdex on next use.
