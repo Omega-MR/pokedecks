@@ -21,7 +21,7 @@ Distributed as freeware. Run the signed `.exe` — no installation required.
 
 ## Getting Started
 
-1. Download `pokedecks.exe` from the releases page.
+1. Download `pokedecks.exe`.
 2. Run it. Windows SmartScreen may warn on first run — this is expected for a self-signed executable. To suppress the warning on your machine, install the bundled `pokedecks.cer` into your Trusted Publishers store via `certmgr.msc`.
 3. On first launch the app fetches the full set catalogue from TCGdex in the background. You will see **Downloading set list** in the bottom-left of the sidebar while this runs. Once complete it shows **Up to date**.
 4. Click **Sets** in the sidebar, then **Add Set** to add your first card set.
