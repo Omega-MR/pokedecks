@@ -36,12 +36,12 @@ The sidebar on the left drives navigation. The main area changes based on what y
 
 ### Sidebar tabs
 
-| Tab            | What it does                                                  |
-| -------------- | ------------------------------------------------------------- |
-| **Collection** | Checkbox view — mark cards you own per variant                |
-| **Duplicates** | Counter view — track how many duplicates you hold per variant |
-| **Sets**       | Manage your added sets (add, reorder, show/hide, delete)      |
-| **Settings**   | API keys and cache controls (opens as a modal)                |
+| Tab            | What it does                                                        |
+| -------------- | ------------------------------------------------------------------- |
+| **Collection** | Multi-state view — mark cards as owned, wishlisted, on order, or N/A per variant |
+| **Duplicates** | Counter view — track how many duplicates you hold per variant       |
+| **Sets**       | Manage your added sets (add, reorder, show/hide, delete)            |
+| **Settings**   | API keys and cache controls (opens as a modal)                      |
 
 ### Bottom of sidebar
 
@@ -94,7 +94,17 @@ Select a set using the top tab bar, then use the **Collection** or **Duplicates*
 
 ### Collection tab
 
-Each row is a card. Each column is a variant (Standard, Holo, Reverse Holo, etc.). Check the box to mark a card as owned for that variant.
+Each row is a card. Each column is a variant (Standard, Holo, Reverse Holo, etc.). Each cell is a multi-state box — click to cycle through states, right-click to reset to empty.
+
+| State | Appearance | Meaning |
+| ----- | ---------- | ------- |
+| Empty | Plain outline | Not tracked |
+| **Owned** | Green box with checkmark | You have this card |
+| **Wishlisted** | Blue box with heart | You want this card |
+| **On order** | Orange box with clock | You have ordered this card |
+| **N/A** | Barely visible box | Not applicable for this card |
+
+Hover over the **Hover for Legend** label (top-left of the card table) to see both the state legend and the full abbreviation key for the active set side by side. The **Columns** button (top-right) lets you show or hide individual variant columns — hidden columns are excluded from PDF summaries.
 
 ### Duplicates tab
 
@@ -124,12 +134,21 @@ If the imported set is not yet in your set list, it is added automatically.
 
 ### Export to PDF
 
-Exports the active set to a print-ready layout via your system print dialog (save as PDF from there). You choose whether to print the **Collection** or **Duplicates** view.
+Exports the active set to a print-ready layout via your system print dialog (save as PDF from there). You choose one of three views to print:
 
-The printed output includes:
+| View | What is printed |
+| ---- | --------------- |
+| **Collection** | Full card table with all states shown |
+| **Wishlist** | Only rows where at least one visible variant is marked Wishlisted |
+| **Duplicates** | Only rows where at least one visible variant has a duplicate count > 0 |
 
-- A cover page with the set name, list type, variant legend, and a summary (owned/missing counts for collection; duplicate counts per variant for duplicates)
-- The full card table, with duplicate rows that have zero count hidden
+Each export includes a cover page with the set name, list type, variant legend, and a summary:
+
+- **Collection** — per-variant owned and not-owned counts (only visible columns; N/A cards excluded from both totals)
+- **Wishlist** — per-variant wishlisted counts (only variants that have at least one wishlisted card)
+- **Duplicates** — per-variant duplicate totals
+
+State icons (checkmark, heart, clock) always print. Background colours print only if "Print background graphics" is enabled in your browser's print dialog. The N/A state is fully invisible on print. Empty boxes render as a plain black outline.
 
 ---
 
