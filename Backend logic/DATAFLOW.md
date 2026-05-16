@@ -53,8 +53,8 @@ User selects a set (tab bar or Sets page)
 
 ```
 User clicks a collection cell
-  └─ State cycles: 0 (empty) → 1 (owned) → 2 (wishlisted) → 3 (on order) → 4 (N/A) → 1 → …
-  └─ Right-click resets directly to 0 (empty)
+  └─ Left-click cycles: 0 (empty) → 1 (owned) → 2 (wishlisted) → 3 (on order) → 1 → …
+  └─ Right-click toggles N/A: non-4 → 4 (N/A); 4 → 0 (empty)
   └─ State updated in memory immediately (React state)
   └─ Write to /user/state.json
        (triggers on any change to collection, duplicates, visibleColumns, managedSets, apiKeys)
@@ -99,6 +99,7 @@ PDF export (Wishlist)
   └─ Temporarily set activeTab = "wishlist"
   └─ Same print flow as Collection
   └─ Rows with no visible variant at state 2 (wishlisted) are print:hidden
+  └─ Cells not at state 2 are print:invisible (column structure preserved, only wishlist icons visible)
   └─ Cover page summary: per-variant wishlisted counts (only variants with count > 0)
   └─ Restore previous activeTab on afterprint event
 
