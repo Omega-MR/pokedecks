@@ -94,15 +94,15 @@ Select a set using the top tab bar, then use the **Collection** or **Duplicates*
 
 ### Collection tab
 
-Each row is a card. Each column is a variant (Standard, Holo, Reverse Holo, etc.). Each cell is a multi-state box — click to cycle through states, right-click to reset to empty.
+Each row is a card. Each column is a variant (Standard, Holo, Reverse Holo, etc.). Each cell is a multi-state box — left-click cycles through practical states, right-click toggles N/A.
 
-| State | Appearance | Meaning |
-| ----- | ---------- | ------- |
-| Empty | Plain outline | Not tracked |
-| **Owned** | Green box with checkmark | You have this card |
-| **Wishlisted** | Blue box with heart | You want this card |
-| **On order** | Orange box with clock | You have ordered this card |
-| **N/A** | Barely visible box | Not applicable for this card |
+| State | Appearance | Meaning | How to set |
+| ----- | ---------- | ------- | ---------- |
+| Empty | Plain outline | Not tracked | Left-click from any state (wraps after On order) |
+| **Owned** | Green box with checkmark | You have this card | Left-click |
+| **Wishlisted** | Blue box with heart | You want this card | Left-click |
+| **On order** | Orange box with clock | You have ordered this card | Left-click |
+| **N/A** | Barely visible box | Not applicable for this card | Right-click (right-click again to clear) |
 
 Hover over the **Hover for Legend** label (top-left of the card table) to see both the state legend and the full abbreviation key for the active set side by side. The **Columns** button (top-right) lets you show or hide individual variant columns — hidden columns are excluded from PDF summaries.
 
@@ -115,8 +115,6 @@ Same layout as Collection. Use the **+** and **−** buttons to increment or dec
 Not all sets have all variants. Sets with a known variant mapping show only the variants available for that set. Sets without a mapping fall back to all global variants, with only **Standard**, **Holo** and **Reverse Holo** visible by default.
 
 Use the **Columns** button (top-right of the card table) to show or hide individual variant columns. Your column preferences are saved per set.
-
-Hover over the **Hover for Legend** label to see the full abbreviation key for the active set.
 
 ---
 

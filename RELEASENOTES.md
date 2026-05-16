@@ -1,9 +1,18 @@
 # PokéDecks — Release Notes
 
----
-
 <details>
 <summary><strong>v2.2.x</strong></summary>
+
+### v2.2.2 — N/A via right-click
+
+**Collection click logic**
+
+- Left-click now cycles only through practical states: **Empty → Owned → Wishlisted → On order → Owned → …** (state 4/N/A removed from left-click cycle)
+- Right-click toggles **N/A**: right-clicking any non-N/A cell sets it to N/A; right-clicking an N/A cell clears it back to empty
+- The **Hover for Legend** state legend updated to reflect the new right-click behaviour
+- **Wishlist PDF**: on print, only cells marked Wishlisted show their icon — all other states are invisible (column structure is preserved)
+
+---
 
 ### v2.2.1 — Legend & polish
 
