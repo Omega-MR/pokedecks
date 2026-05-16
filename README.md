@@ -47,7 +47,7 @@ The sidebar on the left drives navigation. The main area changes based on what y
 
 | Element        | Description                                                    |
 | -------------- | -------------------------------------------------------------- |
-| Sync indicator | Shows current download status or any connection/storage errors |
+| **Sync indicator** | Shows current download status or any connection/storage errors |
 | **Import**     | Restore a JSON backup file for a set                           |
 | **Export**     | Export the active set to JSON or PDF                           |
 
